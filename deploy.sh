@@ -25,6 +25,17 @@ fi
 echo "📦 Building Next.js application..."
 npm run build
 
+echo "🔧 Building OpenNext bundle..."
+npm run build:open-next
+
+echo "🔗 Creating symlink for Terraform compatibility..."
+cd .open-next
+# Remove old symlink if it exists
+rm -f server-function
+# Create symlink from server-function to server-functions/default
+ln -s server-functions/default server-function
+cd ..
+
 echo "🔧 Initializing Terraform..."
 cd terraform
 terraform init

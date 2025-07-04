@@ -134,7 +134,7 @@ resource "aws_db_parameter_group" "database" {
 # OpenNext module for Next.js deployment
 module "open_next" {
   source  = "RJPearson94/open-next/aws//modules/tf-aws-open-next-zone"
-  version = "2.3.0"
+  version = "3.1.0"
 
   prefix = "myapp-rubendinis-${random_id.suffix.hex}"
   folder_path = "../.open-next"

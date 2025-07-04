@@ -101,11 +101,16 @@ jobs:
         echo "📄 OpenNext output configuration:"
         cat .open-next/open-next.output.json
         
-        # Create server-function directory if it doesn't exist (for compatibility)
-        if [ ! -d ".open-next/server-function" ] && [ -d ".open-next/server-functions" ]; then
-          echo "🔗 Creating server-function symlink for compatibility"
-          ln -sf server-functions .open-next/server-function
-        fi
+        # Create server-function symlink for Terraform compatibility
+        echo "🔗 Creating server-function symlink for Terraform compatibility"
+        cd .open-next
+        # Remove old symlink if it exists
+        rm -f server-function
+        # Create symlink from server-function to server-functions/default
+        ln -s server-functions/default server-function
+        echo "✅ Symlink created: server-function -> server-functions/default"
+        ls -la server-function
+        cd ..
 
     - name: Deploy with Terraform
       working-directory: ./terraform
